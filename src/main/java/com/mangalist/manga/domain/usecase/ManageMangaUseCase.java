@@ -1,8 +1,8 @@
 package com.mangalist.manga.domain.usecase;
 
 import com.mangalist.manga.domain.model.Manga;
-import com.mangalist.manga.domain.model.value.Website;
-import com.mangalist.manga.domain.model.value.MangaStatus;
+import com.mangalist.manga.domain.model.MangaWebsite;
+import com.mangalist.manga.domain.model.value.MangaPublicationStatus;
 import com.mangalist.manga.domain.model.value.MangaTitle;
 
 /**
@@ -12,13 +12,13 @@ public interface ManageMangaUseCase {
 
     Manga createNewManga(Manga manga);
 
-    Manga changeStatus(Manga manga, MangaStatus mangaStatus);
+    Manga changeStatus(Manga manga, MangaPublicationStatus mangaPublicationStatus);
 
-    Manga addSupportedWebsite(Manga manga, Website website, MangaTitle title);
+    Manga addSupportedWebsite(Manga manga, MangaWebsite mangaWebsite);
 
     Manga selectPrimaryTitle(Manga manga, MangaTitle mangaTitle);
 
     //TODO:: this one
-//    Manga mergeMangaAndAddAsAlternateTitle(Manga manga, Manga mangaToMerge);
+//    Manga mergeMangaAndAddAsAlternateTitle(Manga sourceManga, Manga targetManga);
 
 }

@@ -46,7 +46,7 @@ class MangaDbRepository implements MangaRepository {
     }
 
     @Override
-    public Manga save(Manga manga) {
+    public Manga saveOrUpdate(Manga manga) {
         MangaEntity mangaEntity = mangaRepository.save(mangaMapper.mapToPersistenceEntity(manga));
         List<MangaWebsiteEntity> mangaWebsiteEntities = manga.getWebsiteList().stream()
                 .map(website -> mangaWebsiteMapper.mapToPersistenceEntity(website, mangaEntity))

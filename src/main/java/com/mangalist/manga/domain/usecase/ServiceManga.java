@@ -2,7 +2,8 @@ package com.mangalist.manga.domain.usecase;
 
 import com.mangalist.common.UseCase;
 import com.mangalist.manga.domain.model.Manga;
-import com.mangalist.manga.domain.model.value.MangaStatus;
+import com.mangalist.manga.domain.model.MangaWebsite;
+import com.mangalist.manga.domain.model.value.MangaPublicationStatus;
 import com.mangalist.manga.domain.model.value.MangaTitle;
 import com.mangalist.manga.domain.model.value.Website;
 import com.mangalist.manga.domain.model.value.MangaId;
@@ -37,24 +38,26 @@ public class ServiceManga implements FindMangaUseCase, ManageMangaUseCase {
 
     @Override
     public Manga createNewManga(Manga manga) {
-        return mangaRepository.save(manga);
+        // TODO:: add validation (maybe duplicate titles not allowed?)
+        return mangaRepository.saveOrUpdate(manga);
     }
 
     @Override
-    public Manga changeStatus(Manga manga, MangaStatus mangaStatus) {
-        manga.changeStatus(mangaStatus);
-        return mangaRepository.save(manga);
+    public Manga changeStatus(Manga manga, MangaPublicationStatus mangaPublicationStatus) {
+        manga.changeStatus(mangaPublicationStatus);
+        return mangaRepository.saveOrUpdate(manga);
     }
 
     @Override
-    public Manga addSupportedWebsite(Manga manga, Website website, MangaTitle title) {
-        manga.addSupportedWebsite(website, title);
-        return mangaRepository.save(manga);
+    public Manga addSupportedWebsite(Manga manga, MangaWebsite mangaWebsite) {
+        manga.addSupportedWebsite(mangaWebsite);
+        return mangaRepository.saveOrUpdate(manga);
     }
 
     @Override
     public Manga selectPrimaryTitle(Manga manga, MangaTitle mangaTitle) {
         manga.selectPrimaryTitle(mangaTitle);
-        return mangaRepository.save(manga);
+        return mangaRepository.saveOrUpdate(manga);
     }
+
 }

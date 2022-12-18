@@ -7,7 +7,6 @@ import com.mangalist.manga.domain.model.MangaWebsite;
 import com.mangalist.manga.domain.model.value.Author;
 import com.mangalist.manga.domain.model.value.MangaId;
 import com.mangalist.manga.domain.model.value.MangaTitle;
-import com.mangalist.manga.domain.model.value.MangaWebsiteId;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ class MangaMapper {
                 MangaTitle.of(persistenceEntity.getName()),
                 Author.of(persistenceEntity.getAuthor()),
                 persistenceEntity.getType(),
-                persistenceEntity.getMangaStatus(),
+                persistenceEntity.getMangaPublicationStatus(),
                 mangaWebsiteList);
     }
 

@@ -2,7 +2,7 @@ package com.mangalist.manga.adapter.persistence;
 
 import com.mangalist.common.entity.CommonEntity;
 import com.mangalist.manga.domain.model.Manga;
-import com.mangalist.manga.domain.model.value.MangaStatus;
+import com.mangalist.manga.domain.model.value.MangaPublicationStatus;
 import com.mangalist.manga.domain.model.value.MangaType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,15 +26,19 @@ class MangaEntity extends CommonEntity {
                 domainEntity.getMangaTitle().getTitle(),
                 domainEntity.getAuthor().getName(),
                 domainEntity.getType(),
-                domainEntity.getMangaStatus());
+                domainEntity.getMangaPublicationStatus());
     }
 
-    private MangaEntity(int id, String name, String author, MangaType type, MangaStatus mangaStatus) {
+    private MangaEntity(int id,
+                        String name,
+                        String author,
+                        MangaType type,
+                        MangaPublicationStatus mangaPublicationStatus) {
         setId(id);
         this.name = name;
         this.author = author;
         this.type = type;
-        this.mangaStatus = mangaStatus;
+        this.mangaPublicationStatus = mangaPublicationStatus;
     }
 
     @Column(name = "name", unique = true)
@@ -47,7 +51,7 @@ class MangaEntity extends CommonEntity {
     private MangaType type = MangaType.UNDEFINED;
 
     @Column(name = "status")
-    private MangaStatus mangaStatus = MangaStatus.UNDEFINED;
+    private MangaPublicationStatus mangaPublicationStatus = MangaPublicationStatus.UNDEFINED;
 
     @OneToMany(mappedBy = "mangaEntity", fetch = FetchType.LAZY)
     private List<MangaWebsiteEntity> mangaWebsiteList;

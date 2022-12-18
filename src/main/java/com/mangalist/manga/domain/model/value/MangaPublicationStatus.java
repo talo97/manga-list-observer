@@ -3,7 +3,7 @@ package com.mangalist.manga.domain.model.value;
 /**
  * @author Artur Talik
  */
-public enum MangaStatus {
+public enum MangaPublicationStatus {
 
     UNDEFINED,
     ONGOING,

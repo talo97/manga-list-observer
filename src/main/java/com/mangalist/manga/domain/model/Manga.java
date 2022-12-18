@@ -17,38 +17,39 @@ public class Manga {
     public static Manga createNewEntity(MangaTitle name,
                                         Author author,
                                         MangaType mangaType,
-                                        MangaStatus mangaStatus,
+                                        MangaPublicationStatus mangaPublicationStatus,
                                         List<MangaWebsite> websiteList) {
-        return createFromExistingEntity(MangaId.newEntity(), name, author, mangaType, mangaStatus, websiteList);
+        return createFromExistingEntity(MangaId.newEntity(), name, author, mangaType, mangaPublicationStatus, websiteList);
     }
 
     public static Manga createFromExistingEntity(MangaId id,
                                                  MangaTitle name,
                                                  Author author,
                                                  MangaType mangaType,
-                                                 MangaStatus mangaStatus,
+                                                 MangaPublicationStatus mangaPublicationStatus,
                                                  List<MangaWebsite> websiteList) {
-        return new Manga(id, name, author, mangaType, mangaStatus, websiteList);
+        return new Manga(id, name, author, mangaType, mangaPublicationStatus, websiteList);
     }
 
     private MangaId mangaId;
     private MangaTitle mangaTitle;
     private Author author;
     private MangaType type;
-    private MangaStatus mangaStatus;
+    private MangaPublicationStatus mangaPublicationStatus;
     private List<MangaWebsite> websiteList;
 
-    public void changeStatus(MangaStatus mangaStatus) {
-        this.mangaStatus = mangaStatus;
+    public void changeStatus(MangaPublicationStatus mangaPublicationStatus) {
+        this.mangaPublicationStatus = mangaPublicationStatus;
     }
 
-    public void addSupportedWebsite(Website website, MangaTitle mangaTitle) {
+    public void addSupportedWebsite(MangaWebsite mangaWebsiteToAdd) {
         if (websiteList.stream().anyMatch(mangaWebsite ->
-                mangaWebsite.getMangaTitle().equals(mangaTitle)
-                        && mangaWebsite.getWebsite().equals(website))) {
-            throw new IllegalArgumentException("Such record already exist in the system. Duplicated data not allowed");
+                mangaWebsite.getWebsite().equals(mangaWebsiteToAdd.getWebsite()))) {
+            String errorMessage =
+                    "Website is already registered for this manga. Duplicated website records aren't allowed";
+            throw new IllegalArgumentException(errorMessage);
         }
-        websiteList.add(MangaWebsite.createNewEntity(website, mangaTitle));
+        websiteList.add(mangaWebsiteToAdd);
     }
 
     public void selectPrimaryTitle(MangaTitle primaryTitle) {

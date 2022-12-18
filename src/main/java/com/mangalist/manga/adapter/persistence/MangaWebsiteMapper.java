@@ -3,6 +3,7 @@ package com.mangalist.manga.adapter.persistence;
 import com.mangalist.common.Mapper;
 import com.mangalist.manga.domain.model.MangaWebsite;
 import com.mangalist.manga.domain.model.value.MangaTitle;
+import com.mangalist.manga.domain.model.value.MangaUrl;
 import com.mangalist.manga.domain.model.value.MangaWebsiteId;
 
 /**
@@ -15,6 +16,7 @@ public class MangaWebsiteMapper {
         return MangaWebsite.createFromExistingEntity(
                 MangaWebsiteId.of(entity.getId()),
                 entity.getWebsite(),
+                MangaUrl.of(entity.getUrl()),
                 MangaTitle.of(entity.getTitle()));
     }
 
@@ -23,6 +25,7 @@ public class MangaWebsiteMapper {
                 domainEntity.getMangaWebsiteId().getId(),
                 mangaEntity,
                 domainEntity.getWebsite(),
+                domainEntity.getMangaUrl().getMainPageUrl(),
                 domainEntity.getMangaTitle().getTitle());
     }
 }

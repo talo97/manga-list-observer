@@ -23,7 +23,7 @@ public class CommonEntity {
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created")
+    @Column(name = "created", updatable = false)
     private Date created;
 
     @UpdateTimestamp

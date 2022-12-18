@@ -18,6 +18,6 @@ public interface MangaRepository {
 
     List<Manga> listByWebsite(Website website);
 
-    Manga save(Manga manga);
+    Manga saveOrUpdate(Manga manga);
 
 }
