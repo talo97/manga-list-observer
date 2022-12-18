@@ -1,20 +1,18 @@
 package com.mangalist.manga.domain.ports;
 
-import com.mangalist.manga.domain.model.searcher.MangaChapterData;
-import com.mangalist.manga.domain.model.searcher.MangaDetailedData;
-import com.mangalist.manga.domain.model.searcher.MangaSimpleData;
-
-import java.io.IOException;
+import com.mangalist.manga.domain.model.value.searcher.MangaChapterData;
+import com.mangalist.manga.domain.model.value.searcher.MangaDetailedData;
+import com.mangalist.manga.domain.model.value.searcher.MangaSimpleData;
 
 /**
  * @author Artur Talik
  */
 public interface MangaWebsiteSearcher {
 
-    Iterable<MangaSimpleData> listAllManga() throws IOException;
+    Iterable<MangaSimpleData> listAllManga();
 
-    MangaDetailedData getDetailedInformation(MangaSimpleData simpleData) throws IOException;
+    MangaDetailedData getDetailedInformation(MangaSimpleData simpleData);
 
-    Iterable<MangaChapterData> listAllChapters(MangaSimpleData mangaPageUrl) throws IOException;
+    Iterable<MangaChapterData> listAllChapters(MangaSimpleData mangaPageUrl);
 
 }

@@ -1,8 +1,8 @@
 package com.mangalist.manga.adapter.persistence;
 
 import com.mangalist.common.entity.CommonEntity;
-import lombok.Getter;
-import lombok.Setter;
+import com.mangalist.manga.domain.model.value.Website;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,15 +11,29 @@ import javax.persistence.*;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity(name = "manga_website")
 class MangaWebsiteEntity extends CommonEntity {
+
+    public static MangaWebsiteEntity of(int id, MangaEntity mangaEntity, Website website, String title) {
+        return new MangaWebsiteEntity(id, mangaEntity, website, title);
+    }
+
+    public MangaWebsiteEntity(int id, MangaEntity mangaEntity, Website website, String title) {
+        setId(id);
+        this.mangaEntity = mangaEntity;
+        this.website = website;
+        this.title = title;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manga_id")
     private MangaEntity mangaEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "website_id")
-    private WebsiteEntity website;
+    @Column(name = "website")
+    private Website website;
+
+    @Column(name = "title")
+    private String title;
 
 }

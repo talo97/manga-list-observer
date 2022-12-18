@@ -7,7 +7,11 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
  * @author Artur Talik
@@ -15,23 +19,28 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @Component
 class MangaModelAssembler implements RepresentationModelAssembler<Manga, EntityModel<Manga>> {
 
-    //TODO::
     @NonNull
     @Override
     public EntityModel<Manga> toModel(@NonNull Manga entity) {
-        throw new UnsupportedOperationException("TODO");
-//        return EntityModel.of(entity,
-//                linkTo(methodOn(MangaController.class).findAll()).withRel("manga"),
-//                linkTo(methodOn(MangaController.class).findById(entity.getId())).withSelfRel());
+        return EntityModel.of(
+                entity,
+                linkTo(methodOn(MangaController.class)
+                        .findAll())
+                        .withRel("manga"),
+                linkTo(methodOn(MangaController.class)
+                        .findById(entity.getMangaId().getId()))
+                        .withSelfRel());
     }
 
     @NonNull
     @Override
     public CollectionModel<EntityModel<Manga>> toCollectionModel(@NonNull Iterable<? extends Manga> entities) {
-        throw new UnsupportedOperationException("TODO");
-//        List<EntityModel<MangaEntity>> mappedList = new ArrayList<>();
-//        entities.forEach(mangaEntity -> mappedList.add(toModel(mangaEntity)));
-//        return CollectionModel.of(mappedList,
-//                linkTo(methodOn(MangaController.class).findAll()).withSelfRel());
+        List<EntityModel<Manga>> mappedList = new ArrayList<>();
+        entities.forEach(mangaEntity -> mappedList.add(toModel(mangaEntity)));
+        return CollectionModel.of(
+                mappedList,
+                linkTo(methodOn(MangaController.class)
+                        .findAll())
+                        .withSelfRel());
     }
 }

@@ -8,4 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MangaConfig {
 
+    //TODO::return domain use cases and services implementation here (using spring annotation atm coz lazy).
+
 }
